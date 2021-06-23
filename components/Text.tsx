@@ -85,9 +85,17 @@ const styles = {
   text: ({ colors }: CustomTheme) => ({
     fontSize: sizes.base,
     color: colors.text,
+    fontFamily: fonts.regular,
   }),
   bold: {
     fontWeight: 'bold',
+  },
+  boldItalic: {
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+  },
+  italic: {
+    fontStyle: 'italic',
   },
   color: ({ colors }: CustomTheme) => ({
     color: colors,
