@@ -85,7 +85,6 @@ const styles = {
   text: ({ colors }: CustomTheme) => ({
     fontSize: sizes.base,
     color: colors.text,
-    fontFamily: fonts.regular,
   }),
   bold: {
     fontWeight: 'bold',

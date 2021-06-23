@@ -1,8 +1,10 @@
 {
   "name": "@rambo0209/core-comps",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Native Core Comps up to date from Rambo with <3",
   "main": "index.ts",
+  "homepage": "https://github.com/hainguyentien/core-comps",
+  "repository": "github:hainguyentien/core-comps",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
