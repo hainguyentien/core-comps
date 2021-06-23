@@ -1,0 +1,18 @@
+{
+  "name": "@rambo0209/core-comps",
+  "version": "1.0.1",
+  "description": "React Native Core Comps up to date from Rambo with <3",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rambo0209",
+    "core-comps"
+  ],
+  "author": "Rambo",
+  "license": "MIT",
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.66.0"
+  }
+}
