@@ -1,4 +1,5 @@
-import { fonts, useCustomTheme } from 'configs'
+import { fonts } from 'configs/fonts'
+import { useCustomTheme } from 'configs/themes'
 import React, { useEffect, useRef, useState } from 'react'
 import {
   Platform,
@@ -12,8 +13,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import { Box } from './Box'
-import { Icon, IconPack } from './Icon'
+import Box from './Box'
+import Icon, { IconPack } from './Icon'
 import Text from './Text'
 
 interface InputProps extends TextInputProps {
@@ -24,7 +25,7 @@ interface InputProps extends TextInputProps {
   containerStyle?: ViewStyle
 }
 
-export const Input = ({
+const Input = ({
   icon,
   containerStyle,
   error,
@@ -143,6 +144,8 @@ export const Input = ({
     </Box>
   )
 }
+
+export default React.memo(Input)
 
 const styles = StyleSheet.create({
   container: {

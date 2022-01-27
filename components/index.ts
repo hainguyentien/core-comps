@@ -1,6 +1,0 @@
-export * from './Box'
-export * from './Button'
-export * from './Icon'
-export * from './Indicator'
-export * from './Input'
-export * from './Text'

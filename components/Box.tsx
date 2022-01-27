@@ -1,25 +1,32 @@
-import { useCustomTheme } from 'configs'
 import React from 'react'
 import {
   ColorValue,
+  Pressable,
+  PressableProps,
   StyleProp,
-  TouchableOpacity,
-  TouchableOpacityProps,
+  View,
   ViewStyle,
+  StyleSheet,
 } from 'react-native'
 
-interface BoxProps extends TouchableOpacityProps {
-  children?: React.ReactNode
+interface BoxProps extends PressableProps {
   horizontal?: boolean
   style?: StyleProp<ViewStyle>
   borderRadius?: number
   flex?: number
   padding?: number
+  paddingTop?: number
+  paddingBottom?: number
+  paddingLeft?: number
+  paddingRight?: number
+  paddingHorizontal?: number
+  paddingVertical?: number
   marginLeft?: number
   marginRight?: number
   marginTop?: number
   marginBottom?: number
   marginHorizontal?: number
+  marginVertical?: number
   margin?: number
   justifyContent?:
     | 'flex-start'
@@ -31,17 +38,12 @@ interface BoxProps extends TouchableOpacityProps {
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline'
   width?: number | string
   height?: number
-  primary?: boolean
-  secondary?: boolean
-  third?: boolean
-  appColor?: boolean
-  card?: boolean
   color?: ColorValue
   borderColor?: ColorValue
   borderTopRadius?: number
 }
 
-export const Box = (props: BoxProps) => {
+const Box: React.FC<BoxProps> = props => {
   const {
     children,
     horizontal,
@@ -49,64 +51,77 @@ export const Box = (props: BoxProps) => {
     borderRadius,
     flex,
     padding,
-    primary,
-    secondary,
-    third,
+    paddingLeft,
+    paddingRight,
+    paddingTop,
+    paddingBottom,
+    paddingVertical,
+    paddingHorizontal,
     marginLeft,
     marginRight,
     marginTop,
     marginBottom,
     marginHorizontal,
+    marginVertical,
     margin,
     width,
     height,
-    appColor,
-    card,
     alignItems,
     justifyContent,
     color,
     borderColor,
     borderTopRadius,
+    onPress,
+    hitSlop,
     ...restProps
   } = props
 
-  const { colors } = useCustomTheme()
+  const calculatedStyle = StyleSheet.flatten<ViewStyle>([
+    !!horizontal && { flexDirection: 'row', alignItems: 'center' },
+    {
+      flex,
+      padding,
+      paddingLeft,
+      paddingRight,
+      paddingTop,
+      paddingBottom,
+      paddingVertical,
+      paddingHorizontal,
+      marginLeft,
+      marginRight,
+      marginTop,
+      marginBottom,
+      margin,
+      borderRadius,
+      marginHorizontal,
+      marginVertical,
+      width,
+      height,
+      justifyContent,
+      backgroundColor: color,
+    },
+    // This make horizontal align center if it not configured
+    !!alignItems && { alignItems },
+    !!borderColor && { borderColor: borderColor, borderWidth: 1 },
+    !!borderTopRadius && {
+      borderTopLeftRadius: borderTopRadius,
+      borderTopRightRadius: borderTopRadius,
+    },
+    style,
+  ])
+
+  if (onPress) {
+    return (
+      <Pressable style={calculatedStyle} {...restProps}>
+        {children}
+      </Pressable>
+    )
+  }
   return (
-    <TouchableOpacity
-      disabled={!restProps.onPress}
-      style={[
-        horizontal && { flexDirection: 'row', alignItems: 'center' },
-        {
-          flex,
-          padding,
-          marginLeft,
-          marginRight,
-          marginTop,
-          marginBottom,
-          margin,
-          borderRadius,
-          marginHorizontal,
-          width,
-          height,
-          justifyContent,
-          backgroundColor: color,
-        },
-        // This make horizontal align center if it not configured
-        !!alignItems && { alignItems },
-        card && { backgroundColor: colors.card },
-        primary && { backgroundColor: colors.background },
-        secondary && { backgroundColor: colors.secondaryBackground },
-        third && { backgroundColor: colors.thirdBackground },
-        appColor && { backgroundColor: colors.primary },
-        !!borderColor && { borderColor: borderColor, borderWidth: 1 },
-        !!borderTopRadius && {
-          borderTopLeftRadius: borderTopRadius,
-          borderTopRightRadius: borderTopRadius,
-        },
-        style,
-      ]}
-      {...restProps}>
+    <View style={calculatedStyle} {...restProps}>
       {children}
-    </TouchableOpacity>
+    </View>
   )
 }
+
+export default Box

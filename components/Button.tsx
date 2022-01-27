@@ -1,5 +1,5 @@
-import { useCustomTheme } from 'configs'
-import * as React from 'react'
+import { useCustomTheme } from 'configs/themes'
+import React from 'react'
 import {
   ActivityIndicator,
   StyleProp,
@@ -7,12 +7,12 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native'
-import { IconPack, Icon } from './Icon'
-import { Box } from './Box'
+import Icon, { IconPack } from './Icon'
+import Box from './Box'
 import Text from './Text'
 
 interface CustomButtonProps {
-  text: string
+  label: string
   loading?: boolean
   outline?: boolean
   color?: string
@@ -22,8 +22,8 @@ interface CustomButtonProps {
   onPress?: () => void
 }
 
-export const Button = (props: CustomButtonProps) => {
-  const { loading, outline, containerStyle, text, textStyle } = props
+const Button = (props: CustomButtonProps) => {
+  const { loading, outline, containerStyle, label, textStyle } = props
   const { colors } = useCustomTheme()
   const highlightColor = props.color ?? colors.primary
   return (
@@ -66,7 +66,7 @@ export const Button = (props: CustomButtonProps) => {
               { color: outline ? highlightColor : '#ffffff' },
               textStyle,
             ]}>
-            {text}
+            {label}
           </Text>
         </>
       )}
@@ -82,3 +82,5 @@ const styles = StyleSheet.create({
   },
   text: {},
 })
+
+export default React.memo(Button)

@@ -1,4 +1,5 @@
-import { CustomTheme, fonts, lineHeights, sizes, useCustomTheme } from 'configs'
+import { fonts, lineHeights, sizes } from 'configs/fonts'
+import { CustomTheme, useCustomTheme } from 'configs/themes'
 import React from 'react'
 import {
   StyleProp,
@@ -9,7 +10,6 @@ import {
 } from 'react-native'
 
 interface CustomTextProps extends TextProps {
-  children?: React.ReactNode
   h1?: boolean
   h2?: boolean
   h3?: boolean
@@ -31,7 +31,7 @@ interface CustomTextProps extends TextProps {
   h6Style?: StyleProp<TextStyle>
 }
 
-export const Text = (props: CustomTextProps) => {
+export const Text: React.FC<CustomTextProps> = props => {
   const theme = useCustomTheme()
   const {
     style,
@@ -127,7 +127,6 @@ const styles = {
 }
 
 Text.defaultProps = {
-  medium: false,
   bold: false,
   secondary: false,
   third: false,
@@ -147,4 +146,4 @@ Text.defaultProps = {
   children: '',
 }
 
-export default Text
+export default React.memo(Text)

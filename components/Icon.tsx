@@ -1,4 +1,4 @@
-import { useCustomTheme } from 'configs'
+import { useCustomTheme } from 'configs/themes'
 import React from 'react'
 import { StyleProp, TextStyle } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -38,7 +38,7 @@ interface IconProps {
   style?: StyleProp<TextStyle>
 }
 
-export const Icon = ({ name, pack, size, color, style }: IconProps) => {
+const Icon = ({ name, pack, size, color, style }: IconProps) => {
   const { colors } = useCustomTheme()
   switch (pack) {
     case 'AntDesign':
@@ -169,3 +169,5 @@ export const Icon = ({ name, pack, size, color, style }: IconProps) => {
       )
   }
 }
+
+export default React.memo(Icon)
