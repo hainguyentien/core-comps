@@ -81,7 +81,6 @@ const Input = ({
     <Box width={'100%'}>
       <Box
         style={containerStyle}
-        activeOpacity={1}
         onPress={() => {
           inputRef.current?.focus()
         }}>
